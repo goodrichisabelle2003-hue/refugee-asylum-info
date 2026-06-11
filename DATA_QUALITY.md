@@ -30,6 +30,10 @@ Bienvenue Aid handles high-risk, changeable information. The dataset must be mai
 - Remove resources that are unrelated, unverifiable, misleading, or unsupported by a working source URL.
 - Use `Broken link` only temporarily while a replacement source is being researched.
 
+## Validator Notes
+
+The validation script warns on duplicate names and source URLs by default. A small allowlist exists for official emergency-number source pages where one government page intentionally verifies several related emergency numbers. Add to that allowlist only when the shared source is clearly authoritative for each listed resource.
+
 ## Safety Statement
 
 This app organizes public information. It is not legal advice. It is not a government service. In emergencies, users should call official emergency numbers. Asylum deadlines can be short and rules change; users should confirm their situation with SPADA, an accredited association, a lawyer, or an official government source.

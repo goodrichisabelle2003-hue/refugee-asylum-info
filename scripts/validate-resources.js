@@ -18,6 +18,9 @@ const urls = new Map();
 const errors = [];
 const warnings = [];
 const today = new Date();
+const allowedSharedSourceUrls = new Set([
+  "https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence",
+]);
 
 function add(map, key, id) {
   if (!key) return;
@@ -67,7 +70,9 @@ for (const [name, items] of names.entries()) {
   if (items.length > 1) warnings.push(`duplicate resource name "${name}": ${items.join(", ")}`);
 }
 for (const [url, items] of urls.entries()) {
-  if (items.length > 1) warnings.push(`duplicate source URL "${url}": ${items.join(", ")}`);
+  if (items.length > 1 && !allowedSharedSourceUrls.has(url)) {
+    warnings.push(`duplicate source URL "${url}": ${items.join(", ")}`);
+  }
 }
 
 warnings.forEach((warning) => console.warn(`Warning: ${warning}`));

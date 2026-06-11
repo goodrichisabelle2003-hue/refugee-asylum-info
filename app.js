@@ -93,6 +93,12 @@ const translations = {
     serviceArea: "Service area",
     dataQuality: "Data quality",
     website: "Open source",
+    hours: "Hours",
+    phone: "Phone",
+    email: "Email",
+    address: "Address",
+    verificationNotes: "Verification notes",
+    currentLanguage: "Current language",
   },
   fr: {
     skipLink: "Aller a la recherche d'aide",
@@ -149,6 +155,12 @@ const translations = {
     serviceArea: "Zone couverte",
     dataQuality: "Qualite",
     website: "Ouvrir la source",
+    hours: "Horaires",
+    phone: "Telephone",
+    email: "Email",
+    address: "Adresse",
+    verificationNotes: "Notes de verification",
+    currentLanguage: "Langue actuelle",
   },
   dr: {
     skipLink: "رفتن به بخش یافتن کمک",
@@ -205,11 +217,82 @@ const translations = {
     serviceArea: "منطقه خدمات",
     dataQuality: "کیفیت معلومات",
     website: "باز کردن منبع",
+    hours: "ساعت‌ها",
+    phone: "تیلفون",
+    email: "ایمیل",
+    address: "آدرس",
+    verificationNotes: "یادداشت‌های بررسی",
+    currentLanguage: "زبان فعلی",
   },
 };
 
 const languageOrder = ["en", "fr", "dr"];
 const languageNames = { en: "English", fr: "Français", dr: "دری" };
+const labelMaps = {
+  en: {},
+  fr: {
+    accessibility: "accessibilite",
+    appeal: "recours",
+    appointment: "rendez-vous",
+    dublin: "procedure Dublin",
+    emergency: "urgence",
+    family: "famille",
+    "family-with-children": "famille avec enfants",
+    food: "alimentation",
+    free: "gratuit",
+    health: "sante",
+    housing: "hebergement",
+    "in-person": "sur place",
+    integration: "integration",
+    language: "langue",
+    legal: "juridique",
+    national: "national",
+    nonprofit: "association",
+    official: "officiel",
+    online: "en ligne",
+    phone: "telephone",
+    plan: "a preparer",
+    safety: "securite",
+    "Needs review": "A verifier",
+    today: "aujourd'hui",
+    unknown: "inconnu",
+    week: "cette semaine",
+    welfare: "aide sociale",
+    work: "travail",
+    Verified: "Verifie",
+  },
+  dr: {
+    accessibility: "دسترسی‌پذیری",
+    appeal: "استیناف",
+    appointment: "وقت ملاقات",
+    dublin: "روند دوبلین",
+    emergency: "اضطراری",
+    family: "خانواده",
+    "family-with-children": "خانواده با کودکان",
+    food: "غذا",
+    free: "رایگان",
+    health: "صحت",
+    housing: "سرپناه",
+    "in-person": "حضوری",
+    integration: "ادغام",
+    language: "زبان",
+    legal: "حقوقی",
+    national: "ملی",
+    nonprofit: "انجمن غیرانتفاعی",
+    official: "رسمی",
+    online: "آنلاین",
+    phone: "تیلفون",
+    plan: "برنامه‌ریزی",
+    safety: "امنیت",
+    "Needs review": "نیاز به بازبینی",
+    today: "امروز",
+    unknown: "نامعلوم",
+    week: "این هفته",
+    welfare: "رفاه",
+    work: "کار",
+    Verified: "بررسی‌شده",
+  },
+};
 const urgencyRank = { today: 0, week: 1, plan: 2 };
 const sourceRank = { emergency: 0, official: 1, nonprofit: 2, "legal-information": 3, directory: 4, other: 5 };
 
@@ -224,6 +307,10 @@ const nodes = {
 
 function t(key) {
   return translations[state.language][key] || translations.en[key] || key;
+}
+
+function label(value) {
+  return labelMaps[state.language][value] || value;
 }
 
 function readSavedPlan() {
@@ -255,7 +342,7 @@ function el(tag, options = {}, children = []) {
 }
 
 function formatList(items) {
-  return Array.isArray(items) && items.length ? items.join(", ") : "Unknown";
+  return Array.isArray(items) && items.length ? items.map(label).join(", ") : "Unknown";
 }
 
 function normalize(value) {
@@ -339,16 +426,16 @@ function uniqueFrom(field) {
 }
 
 function populateFilters() {
-  setOptions("needFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("needs").map((value) => ({ value, label: value }))]);
+  setOptions("needFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("needs").map((value) => ({ value, label: label(value) }))]);
   const areas = new Set(["national", "online"]);
   state.resources.forEach((resource) => [...(resource.regions || []), ...(resource.cities || [])].forEach((item) => item && areas.add(item)));
-  setOptions("regionFilter", [{ value: "all", label: t("all") }, ...[...areas].sort().map((value) => ({ value, label: value }))]);
-  setOptions("statusFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("statuses").map((value) => ({ value, label: value }))]);
-  setOptions("urgencyFilter", ["all", "today", "week", "plan"].map((value) => ({ value, label: value === "all" ? t("all") : value })));
+  setOptions("regionFilter", [{ value: "all", label: t("all") }, ...[...areas].sort().map((value) => ({ value, label: label(value) }))]);
+  setOptions("statusFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("statuses").map((value) => ({ value, label: label(value) }))]);
+  setOptions("urgencyFilter", ["all", "today", "week", "plan"].map((value) => ({ value, label: value === "all" ? t("all") : label(value) })));
   setOptions("languageFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("languages").map((value) => ({ value, label: value }))]);
-  setOptions("typeFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("resource_type").map((value) => ({ value, label: value }))]);
-  setOptions("qualityFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("data_quality").map((value) => ({ value, label: value }))]);
-  setOptions("costFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("cost").map((value) => ({ value, label: value }))]);
+  setOptions("typeFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("resource_type").map((value) => ({ value, label: label(value) }))]);
+  setOptions("qualityFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("data_quality").map((value) => ({ value, label: label(value) }))]);
+  setOptions("costFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("cost").map((value) => ({ value, label: label(value) }))]);
   Object.entries(state.filters).forEach(([key, value]) => {
     const node = document.querySelector(`#${key}Filter`);
     if (node) node.value = value;
@@ -399,10 +486,10 @@ function renderResourceCard(resource) {
     ]),
   ]);
   const tags = el("div", { className: "tag-list" }, [
-    badge(resource.urgency, resource.urgency === "today" ? "urgent" : ""),
-    badge(resource.data_quality, resource.data_quality === "Verified" ? "verified" : "review"),
-    badge(resource.source_type),
-    ...(resource.resource_type || []).map((type) => badge(type, type === "online" ? "online" : "")),
+    badge(label(resource.urgency), resource.urgency === "today" ? "urgent" : ""),
+    badge(label(resource.data_quality), resource.data_quality === "Verified" ? "verified" : "review"),
+    badge(label(resource.source_type)),
+    ...(resource.resource_type || []).map((type) => badge(label(type), type === "online" ? "online" : "")),
   ]);
   const details = el("details", { className: "resource-details" }, [
     el("summary", { text: t("showDetails") }),
@@ -412,12 +499,12 @@ function renderResourceCard(resource) {
       field(t("eligibility"), resource.eligibility),
       field(t("languages"), resource.languages),
       field(t("cost"), resource.cost),
-      field("Hours", resource.hours),
-      field("Phone", resource.phone),
-      field("Email", resource.email),
-      field("Address", resource.address),
-      field(t("dataQuality"), resource.data_quality),
-      field("Verification notes", resource.verification_notes),
+      field(t("hours"), resource.hours),
+      field(t("phone"), resource.phone),
+      field(t("email"), resource.email),
+      field(t("address"), resource.address),
+      field(t("dataQuality"), label(resource.data_quality)),
+      field(t("verificationNotes"), resource.verification_notes),
     ].filter(Boolean)),
   ]);
   const source = el("p", { className: "source-line" }, [
@@ -474,7 +561,7 @@ function applyTranslations() {
     node.textContent = t(node.dataset.i18n);
   });
   const nextLanguage = languageOrder[(languageOrder.indexOf(state.language) + 1) % languageOrder.length];
-  nodes.languageToggle.textContent = languageNames[nextLanguage];
+  nodes.languageToggle.textContent = `${t("currentLanguage")}: ${languageNames[state.language]} · ${languageNames[nextLanguage]}`;
   nodes.languageToggle.setAttribute("aria-label", `Switch language to ${languageNames[nextLanguage]}`);
   populateFilters();
   renderResources();
