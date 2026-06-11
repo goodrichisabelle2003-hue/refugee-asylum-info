@@ -1,0 +1,752 @@
+[
+  {
+    "id": "emergency-samu-15",
+    "name": "SAMU medical emergency",
+    "category": "Emergency",
+    "resource_type": [
+      "phone"
+    ],
+    "summary": "Call 15 for urgent medical emergencies in France.",
+    "description": "Use this number for life-threatening medical emergencies or urgent medical danger. If you cannot decide which emergency service is needed, 112 can also route emergency help.",
+    "regions": [
+      "national"
+    ],
+    "cities": [],
+    "service_area": "France",
+    "needs": [
+      "emergency",
+      "health"
+    ],
+    "statuses": [
+      "any"
+    ],
+    "urgency": "today",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "Anyone in France facing a medical emergency.",
+    "cost": "free",
+    "hours": "24/7",
+    "address": "",
+    "phone": "15",
+    "email": "",
+    "website": "https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence",
+    "source_name": "Gouvernement.fr emergency numbers",
+    "source_url": "https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence",
+    "source_type": "emergency",
+    "last_verified": "2026-06-11",
+    "data_quality": "Needs review",
+    "verification_notes": "Official emergency-number source blocks automated fetches but is an official French government emergency-number page; verify manually during review.",
+    "next_step": "Call 15 immediately for urgent medical danger."
+  },
+  {
+    "id": "emergency-police-17",
+    "name": "Police / gendarmerie emergency",
+    "category": "Emergency",
+    "resource_type": [
+      "phone"
+    ],
+    "summary": "Call 17 if someone is in immediate danger or a crime is happening.",
+    "description": "Use this number for immediate danger, violence, threats, or urgent police/gendarmerie intervention.",
+    "regions": [
+      "national"
+    ],
+    "cities": [],
+    "service_area": "France",
+    "needs": [
+      "emergency",
+      "safety",
+      "family"
+    ],
+    "statuses": [
+      "any"
+    ],
+    "urgency": "today",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "Anyone in France facing immediate danger.",
+    "cost": "free",
+    "hours": "24/7",
+    "address": "",
+    "phone": "17",
+    "email": "",
+    "website": "https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence",
+    "source_name": "Gouvernement.fr emergency numbers",
+    "source_url": "https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence",
+    "source_type": "emergency",
+    "last_verified": "2026-06-11",
+    "data_quality": "Needs review",
+    "verification_notes": "Official emergency-number source blocks automated fetches; verify manually during review.",
+    "next_step": "Call 17 if you or someone nearby is in immediate danger."
+  },
+  {
+    "id": "emergency-europe-112",
+    "name": "European emergency number",
+    "category": "Emergency",
+    "resource_type": [
+      "phone"
+    ],
+    "summary": "Call 112 from a mobile phone for emergency help across Europe.",
+    "description": "112 is the European emergency number and can route emergency help when you are unsure which service to call.",
+    "regions": [
+      "national"
+    ],
+    "cities": [],
+    "service_area": "Europe, including France",
+    "needs": [
+      "emergency"
+    ],
+    "statuses": [
+      "any"
+    ],
+    "urgency": "today",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "Anyone in an emergency in Europe.",
+    "cost": "free",
+    "hours": "24/7",
+    "address": "",
+    "phone": "112",
+    "email": "",
+    "website": "https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence",
+    "source_name": "Gouvernement.fr emergency numbers",
+    "source_url": "https://www.gouvernement.fr/risques/connaitre-les-numeros-d-urgence",
+    "source_type": "emergency",
+    "last_verified": "2026-06-11",
+    "data_quality": "Needs review",
+    "verification_notes": "Official emergency-number source blocks automated fetches; verify manually during review.",
+    "next_step": "Call 112 if you need emergency help and are unsure which number to use."
+  },
+  {
+    "id": "emergency-shelter-115",
+    "name": "115 emergency accommodation",
+    "category": "Shelter and housing",
+    "resource_type": [
+      "phone"
+    ],
+    "summary": "Call 115 if you have no safe place to sleep tonight.",
+    "description": "The 115 emergency social accommodation number can orient people without shelter. Availability varies by location and demand.",
+    "regions": [
+      "national"
+    ],
+    "cities": [],
+    "service_area": "France",
+    "needs": [
+      "housing",
+      "emergency",
+      "welfare"
+    ],
+    "statuses": [
+      "any",
+      "new-arrival",
+      "family-with-children"
+    ],
+    "urgency": "today",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "People in France without safe accommodation; families and vulnerable people should state their situation clearly.",
+    "cost": "free",
+    "hours": "24/7",
+    "address": "",
+    "phone": "115",
+    "email": "",
+    "website": "https://www.samu-social.paris/115",
+    "source_name": "Samu social de Paris - 115",
+    "source_url": "https://www.samu-social.paris/115",
+    "source_type": "emergency",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Reachable source page for 115 emergency accommodation orientation; national availability and local capacity should be reviewed regularly.",
+    "next_step": "Call 115 and explain your city, family size, ages of children, and any safety or health risks."
+  },
+  {
+    "id": "emergency-accessible-114",
+    "name": "114 accessible emergency service",
+    "category": "Emergency",
+    "resource_type": [
+      "phone",
+      "online"
+    ],
+    "summary": "Emergency access service for people who are deaf, hard of hearing, aphasic, or have difficulty speaking.",
+    "description": "114 is intended for emergency communication when calling by voice is difficult or impossible.",
+    "regions": [
+      "national"
+    ],
+    "cities": [],
+    "service_area": "France",
+    "needs": [
+      "emergency",
+      "accessibility"
+    ],
+    "statuses": [
+      "any"
+    ],
+    "urgency": "today",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "People with difficulty hearing or speaking who need emergency assistance.",
+    "cost": "free",
+    "hours": "24/7",
+    "address": "",
+    "phone": "114",
+    "email": "",
+    "website": "https://www.info.gouv.fr/actualite/114-le-numero-durgence-au-service-des-personnes-ayant-des-difficultes-a-parler-ou-a-entendre",
+    "source_name": "Info.gouv.fr - 114 emergency access",
+    "source_url": "https://www.info.gouv.fr/actualite/114-le-numero-durgence-au-service-des-personnes-ayant-des-difficultes-a-parler-ou-a-entendre",
+    "source_type": "emergency",
+    "last_verified": "2026-06-11",
+    "data_quality": "Needs review",
+    "verification_notes": "Official source URL blocks automated fetches; included because the emergency access service is official but needs manual review.",
+    "next_step": "Use 114 if you cannot call emergency services by voice."
+  },
+  {
+    "id": "service-public-asylum",
+    "name": "Service-Public.fr asylum seeker information",
+    "category": "Asylum procedure",
+    "resource_type": [
+      "online"
+    ],
+    "summary": "Official public-service information on asylum, social support, work rights, Dublin questions, and appeals.",
+    "description": "Service-Public.fr organizes official information about asylum applications, aid, work rights, Dublin procedure questions, and appeals after OFPRA decisions.",
+    "regions": [
+      "national",
+      "online"
+    ],
+    "cities": [],
+    "service_area": "France and online",
+    "needs": [
+      "legal",
+      "welfare",
+      "work",
+      "appeal"
+    ],
+    "statuses": [
+      "new-arrival",
+      "appointment",
+      "dublin",
+      "appeal",
+      "recognized-refugee"
+    ],
+    "urgency": "week",
+    "languages": [
+      "French",
+      "English"
+    ],
+    "eligibility": "People seeking official public information about asylum in France.",
+    "cost": "free",
+    "hours": "Online",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.service-public.gouv.fr/particuliers/vosdroits/N106",
+    "source_name": "Service-Public.fr - Demande d asile",
+    "source_url": "https://www.service-public.gouv.fr/particuliers/vosdroits/N106",
+    "source_type": "official",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Opened source page and confirmed it lists asylum application, social aid, work rights, Dublin, and appeal questions.",
+    "next_step": "Use this page to identify the official topic you need, then confirm deadlines with SPADA, an association, or a lawyer."
+  },
+  {
+    "id": "ofpra-apply-asylum",
+    "name": "OFPRA - applying for asylum",
+    "category": "Asylum procedure",
+    "resource_type": [
+      "online"
+    ],
+    "summary": "Official OFPRA page explaining the asylum application pathway after first reception and GUDA/France asile steps.",
+    "description": "OFPRA is the French office that examines asylum and statelessness applications. Its application page links the process through SPADA, the single desk or territorial France asile pole, and OFPRA.",
+    "regions": [
+      "national",
+      "online"
+    ],
+    "cities": [],
+    "service_area": "France and online",
+    "needs": [
+      "legal"
+    ],
+    "statuses": [
+      "appointment",
+      "new-arrival"
+    ],
+    "urgency": "week",
+    "languages": [
+      "French",
+      "English"
+    ],
+    "eligibility": "People preparing or following an asylum application with OFPRA.",
+    "cost": "free",
+    "hours": "Online",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.ofpra.gouv.fr/dossier/demander-lasile",
+    "source_name": "OFPRA - Demander l asile",
+    "source_url": "https://www.ofpra.gouv.fr/dossier/demander-lasile",
+    "source_type": "official",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Opened OFPRA page; it lists Step 1 SPADA, Step 2 guichet unique or territorial France asile pole, Step 3 OFPRA.",
+    "next_step": "Read OFPRA steps and prepare documents and timeline before submitting or attending interviews."
+  },
+  {
+    "id": "ofii-reception-conditions",
+    "name": "OFII - reception conditions for asylum seekers",
+    "category": "Shelter and welfare",
+    "resource_type": [
+      "online",
+      "in-person"
+    ],
+    "summary": "Official OFII information about material reception conditions, accommodation orientation, and support for asylum seekers.",
+    "description": "OFII manages reception-related processes for asylum seekers, including material reception conditions. Specific entitlements depend on the person’s procedure and acceptance of conditions.",
+    "regions": [
+      "national",
+      "online"
+    ],
+    "cities": [],
+    "service_area": "France",
+    "needs": [
+      "housing",
+      "welfare"
+    ],
+    "statuses": [
+      "new-arrival",
+      "appointment"
+    ],
+    "urgency": "week",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "Asylum seekers whose reception-condition eligibility must be assessed by OFII.",
+    "cost": "free",
+    "hours": "See local OFII information",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.ofii.fr/demandeurs-dasile/",
+    "source_name": "OFII - Demandeurs d asile",
+    "source_url": "https://www.ofii.fr/demandeurs-dasile/",
+    "source_type": "official",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Reachability check returned 200 for OFII demandeurs d asile page. Eligibility details should be confirmed with OFII/SPADA.",
+    "next_step": "Ask OFII or SPADA whether reception conditions apply to you and what documents are needed."
+  },
+  {
+    "id": "cnda-appeal",
+    "name": "CNDA - appeal after OFPRA decision",
+    "category": "Appeal and legal procedure",
+    "resource_type": [
+      "online"
+    ],
+    "summary": "Official CNDA information on filing an appeal after an OFPRA decision.",
+    "description": "The CNDA examines appeals against certain OFPRA decisions. The official page explains what can be contested, who can file, and that some deadlines are short.",
+    "regions": [
+      "national",
+      "online"
+    ],
+    "cities": [],
+    "service_area": "France and online",
+    "needs": [
+      "legal",
+      "appeal"
+    ],
+    "statuses": [
+      "appeal"
+    ],
+    "urgency": "today",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "People seeking to contest an OFPRA asylum decision; confirm your own deadline immediately.",
+    "cost": "unknown",
+    "hours": "Online",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.cnda.fr/vos-demarches/je-suis-un-demandeur/deposer-mon-recours",
+    "source_name": "CNDA - Deposer mon recours",
+    "source_url": "https://www.cnda.fr/vos-demarches/je-suis-un-demandeur/deposer-mon-recours",
+    "source_type": "official",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Opened source page; it states CNDA examines appeals against OFPRA decisions and mentions a one-month appeal period. Users must confirm individual deadlines.",
+    "next_step": "If you received an OFPRA decision, contact a lawyer or legal association immediately and check your appeal deadline."
+  },
+  {
+    "id": "unhcr-france-help",
+    "name": "UNHCR France help site",
+    "category": "Rights information",
+    "resource_type": [
+      "online"
+    ],
+    "summary": "UNHCR France information site for refugees, asylum seekers, stateless people, family members, and helpers.",
+    "description": "UNHCR France provides information and useful links on asking for asylum in France, rights and obligations, family reunification, statelessness, resettlement, and reporting exploitation and abuse.",
+    "regions": [
+      "national",
+      "online"
+    ],
+    "cities": [],
+    "service_area": "France and online",
+    "needs": [
+      "legal",
+      "family",
+      "safety"
+    ],
+    "statuses": [
+      "new-arrival",
+      "appointment",
+      "recognized-refugee",
+      "stateless"
+    ],
+    "urgency": "plan",
+    "languages": [
+      "French",
+      "English",
+      "Russian",
+      "Ukrainian",
+      "Spanish"
+    ],
+    "eligibility": "People in France under UNHCR mandate and those assisting them.",
+    "cost": "free",
+    "hours": "Online",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://help.unhcr.org/france/",
+    "source_name": "UNHCR France help",
+    "source_url": "https://help.unhcr.org/france/",
+    "source_type": "legal-information",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Opened source page; it states it is for refugees, asylum seekers, stateless people, family members, and helpers in France.",
+    "next_step": "Use this as a multilingual orientation source, then verify deadlines or case-specific questions with official or legal support."
+  },
+  {
+    "id": "la-cimade-help",
+    "name": "La Cimade",
+    "category": "Legal and rights support",
+    "resource_type": [
+      "online",
+      "in-person"
+    ],
+    "summary": "Nonprofit rights organization with regional groups and support for foreign nationals, including asylum-related work.",
+    "description": "La Cimade works on asylum rights, detention, expulsion, unaccompanied minors, victims of violence, housing, and French courses through national and regional activity. Local services vary.",
+    "regions": [
+      "national",
+      "ile-de-france",
+      "auvergne-rhone-alpes",
+      "hauts-de-france",
+      "provence-alpes-cote-d-azur",
+      "online"
+    ],
+    "cities": [],
+    "service_area": "France, regional groups and online information",
+    "needs": [
+      "legal",
+      "language",
+      "family",
+      "housing"
+    ],
+    "statuses": [
+      "new-arrival",
+      "appointment",
+      "dublin",
+      "appeal",
+      "minor"
+    ],
+    "urgency": "week",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "Foreign nationals and migrants needing rights information; local appointment conditions vary.",
+    "cost": "free",
+    "hours": "Varies by local group",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.lacimade.org/",
+    "source_name": "La Cimade official website",
+    "source_url": "https://www.lacimade.org/",
+    "source_type": "nonprofit",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Opened homepage; navigation lists asylum, local regions, being helped by La Cimade, minors, violence victims, housing, and French courses. Specific local contacts must be checked on the site.",
+    "next_step": "Use the regional/local pages to find the nearest help point before visiting."
+  },
+  {
+    "id": "gisti-legal-information",
+    "name": "GISTI legal information",
+    "category": "Legal information",
+    "resource_type": [
+      "online"
+    ],
+    "summary": "Specialized legal information on foreign nationals’ rights, asylum, residence, and related legal issues.",
+    "description": "GISTI is a legal-information source for foreign nationals’ rights. Its site may block automated access; use it as background and verify case-specific questions with qualified help.",
+    "regions": [
+      "national",
+      "online"
+    ],
+    "cities": [],
+    "service_area": "France and online",
+    "needs": [
+      "legal",
+      "appeal"
+    ],
+    "statuses": [
+      "appointment",
+      "dublin",
+      "appeal"
+    ],
+    "urgency": "plan",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "People and helpers looking for legal-information resources.",
+    "cost": "free",
+    "hours": "Online",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.gisti.org/",
+    "source_name": "GISTI",
+    "source_url": "https://www.gisti.org/",
+    "source_type": "legal-information",
+    "last_verified": "2026-06-11",
+    "data_quality": "Needs review",
+    "verification_notes": "Terminal reachability returned 200 but browser open showed an anti-bot access page; content should be manually reviewed before relying on details.",
+    "next_step": "Use GISTI materials to prepare questions for a lawyer or association, not as case-specific legal advice."
+  },
+  {
+    "id": "france-terre-asile",
+    "name": "France terre d asile",
+    "category": "Reception and integration",
+    "resource_type": [
+      "online",
+      "in-person"
+    ],
+    "summary": "Nonprofit organization supporting asylum seekers and refugees through reception, rights access, accommodation, and integration services.",
+    "description": "France terre d asile provides services for asylum seekers and refugees. Programs and local access vary; use the website to find relevant services and confirm eligibility.",
+    "regions": [
+      "national",
+      "ile-de-france",
+      "hauts-de-france",
+      "online"
+    ],
+    "cities": [],
+    "service_area": "France, depending on program location",
+    "needs": [
+      "legal",
+      "housing",
+      "language",
+      "family",
+      "integration"
+    ],
+    "statuses": [
+      "new-arrival",
+      "appointment",
+      "recognized-refugee",
+      "minor"
+    ],
+    "urgency": "week",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "Asylum seekers, refugees, and migrants depending on the specific program.",
+    "cost": "free",
+    "hours": "Varies by program",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.france-terre-asile.org/",
+    "source_name": "France terre d asile official website",
+    "source_url": "https://www.france-terre-asile.org/",
+    "source_type": "nonprofit",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Reachability check returned 200 for official site. Specific local service details require program-level review.",
+    "next_step": "Find the relevant local or program page and ask what documents are needed for an appointment."
+  },
+  {
+    "id": "restos-du-coeur",
+    "name": "Restos du Coeur",
+    "category": "Food and material aid",
+    "resource_type": [
+      "online",
+      "in-person"
+    ],
+    "summary": "Food assistance and local support through departmental and local centers.",
+    "description": "Restos du Coeur provides food assistance and related support through local centers. Registration and eligibility can vary locally.",
+    "regions": [
+      "national"
+    ],
+    "cities": [],
+    "service_area": "France, local centers",
+    "needs": [
+      "food",
+      "welfare"
+    ],
+    "statuses": [
+      "any",
+      "new-arrival",
+      "family-with-children"
+    ],
+    "urgency": "week",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "People in need of food or material assistance; local registration rules vary.",
+    "cost": "free",
+    "hours": "Varies by local center",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.restosducoeur.org/",
+    "source_name": "Restos du Coeur official website",
+    "source_url": "https://www.restosducoeur.org/",
+    "source_type": "nonprofit",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Reachability check returned 200 for official site; local eligibility and opening hours require local review.",
+    "next_step": "Search for your local center and check registration documents and opening hours before going."
+  },
+  {
+    "id": "croix-rouge-francaise",
+    "name": "Croix-Rouge francaise",
+    "category": "Emergency and social aid",
+    "resource_type": [
+      "online",
+      "in-person"
+    ],
+    "summary": "French Red Cross local teams may provide emergency aid, social support, food, clothing, and orientation.",
+    "description": "Croix-Rouge francaise provides local social and emergency support depending on departmental services and availability.",
+    "regions": [
+      "national"
+    ],
+    "cities": [],
+    "service_area": "France, local delegations",
+    "needs": [
+      "food",
+      "health",
+      "family",
+      "welfare",
+      "emergency"
+    ],
+    "statuses": [
+      "any",
+      "new-arrival",
+      "family-with-children"
+    ],
+    "urgency": "week",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "People needing emergency or social aid; service availability varies locally.",
+    "cost": "free",
+    "hours": "Varies by local delegation",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.croix-rouge.fr/",
+    "source_name": "Croix-Rouge francaise official website",
+    "source_url": "https://www.croix-rouge.fr/",
+    "source_type": "nonprofit",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Reachability check returned 200 for official site; local services and hours require local review.",
+    "next_step": "Look up your local delegation and ask about social assistance, food, clothing, or orientation hours."
+  },
+  {
+    "id": "secours-catholique",
+    "name": "Secours Catholique",
+    "category": "Food and welfare support",
+    "resource_type": [
+      "online",
+      "in-person"
+    ],
+    "summary": "Local welcome and support services may include material aid, listening, social orientation, and French conversation.",
+    "description": "Secours Catholique provides local support through delegations and welcome points. Services vary by location.",
+    "regions": [
+      "national"
+    ],
+    "cities": [],
+    "service_area": "France, local delegations",
+    "needs": [
+      "food",
+      "welfare",
+      "language",
+      "family"
+    ],
+    "statuses": [
+      "any",
+      "new-arrival",
+      "family-with-children"
+    ],
+    "urgency": "week",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "People needing social or material support; local conditions vary.",
+    "cost": "free",
+    "hours": "Varies by local delegation",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.secours-catholique.org/",
+    "source_name": "Secours Catholique official website",
+    "source_url": "https://www.secours-catholique.org/",
+    "source_type": "nonprofit",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Reachability check returned 200 for official site; specific local support details require local review.",
+    "next_step": "Contact your local delegation and ask for accueil social or migrant support."
+  },
+  {
+    "id": "secours-populaire",
+    "name": "Secours Populaire francais",
+    "category": "Food and material aid",
+    "resource_type": [
+      "online",
+      "in-person"
+    ],
+    "summary": "Solidarity organization offering local material, food, and social support depending on area.",
+    "description": "Secours Populaire works through local federations and committees. Local access, documents, and opening hours vary.",
+    "regions": [
+      "national"
+    ],
+    "cities": [],
+    "service_area": "France, local federations",
+    "needs": [
+      "food",
+      "welfare",
+      "family"
+    ],
+    "statuses": [
+      "any",
+      "new-arrival",
+      "family-with-children"
+    ],
+    "urgency": "week",
+    "languages": [
+      "French"
+    ],
+    "eligibility": "People needing solidarity, food, or material support; local conditions vary.",
+    "cost": "free",
+    "hours": "Varies by local federation",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "website": "https://www.secourspopulaire.fr/",
+    "source_name": "Secours Populaire francais official website",
+    "source_url": "https://www.secourspopulaire.fr/",
+    "source_type": "nonprofit",
+    "last_verified": "2026-06-11",
+    "data_quality": "Verified",
+    "verification_notes": "Reachability check returned 200 for official site; local details require local review.",
+    "next_step": "Find the local federation or committee for your area and check how to request aid."
+  }
+]

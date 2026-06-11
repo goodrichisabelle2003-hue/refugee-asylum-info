@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,159 +13,123 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app-shell">
-      <header class="topbar" aria-label="Primary">
+    <a class="skip-link" href="#finder" data-i18n="skipLink">Skip to find help</a>
+    <header class="site-header">
+      <nav class="topbar" aria-label="Primary navigation">
         <a class="brand" href="#top" aria-label="Bienvenue Aid home">
           <span class="brand-mark" aria-hidden="true">BA</span>
           <span>Bienvenue Aid</span>
         </a>
         <div class="topbar-actions">
-          <button class="ghost-button" id="languageToggle" type="button">FR</button>
-          <a class="primary-link" href="#finder">Find support</a>
+          <a href="#urgent" data-i18n="navUrgent">Urgent help</a>
+          <a href="#finder" data-i18n="navFind">Find help</a>
+          <a href="#plan" data-i18n="navPlan">Saved plan</a>
+          <button class="ghost-button" id="languageToggle" type="button" aria-live="polite">Français</button>
         </div>
-      </header>
+      </nav>
+    </header>
 
-      <section class="hero" id="top">
+    <main class="app-shell" id="top">
+      <section class="hero" aria-labelledby="heroTitle">
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="eyebrow">France asylum support navigator</p>
-          <h1 data-i18n="heroTitle">Find legal, housing, health, and welfare help in France.</h1>
+          <h1 id="heroTitle" data-i18n="heroTitle">Find reliable asylum, legal, health, and welfare help in France.</h1>
           <p data-i18n="heroText">
-            Answer a few questions and build a practical action plan for the first days after arriving in France.
+            Search verified public information and nonprofit support without entering personal case details.
           </p>
           <div class="hero-actions">
-            <a class="primary-button" href="#finder" data-i18n="startButton">Start matching</a>
-            <a class="secondary-button" href="#urgent" data-i18n="urgentButton">I need urgent help</a>
+            <a class="primary-button" href="#finder" data-i18n="startButton">Find help</a>
+            <a class="secondary-button" href="#urgent" data-i18n="urgentButton">Emergency numbers</a>
           </div>
+          <p class="translation-note" data-i18n="translationNote">
+            UI labels are translated. Resource details remain in the verified source language unless reviewed translation is available.
+          </p>
         </div>
         <div class="hero-media">
           <img src="images/asylum-support-hero.png" alt="A community support desk helping newly arrived people in France" />
         </div>
       </section>
 
-      <section class="urgent-strip" id="urgent" aria-label="Urgent help">
-        <article>
-          <span>15</span>
-          <div>
-            <h2 data-i18n="medicalTitle">Medical emergency</h2>
-            <p data-i18n="medicalText">Call SAMU for urgent medical danger.</p>
-          </div>
-        </article>
-        <article>
-          <span>17</span>
-          <div>
-            <h2 data-i18n="policeTitle">Immediate danger</h2>
-            <p data-i18n="policeText">Call police or gendarmerie if someone is at risk.</p>
-          </div>
-        </article>
-        <article>
-          <span>115</span>
-          <div>
-            <h2 data-i18n="shelterTitle">No safe place tonight</h2>
-            <p data-i18n="shelterText">Call emergency social accommodation.</p>
-          </div>
-        </article>
-        <article>
-          <span>112</span>
-          <div>
-            <h2 data-i18n="europeTitle">European emergency</h2>
-            <p data-i18n="europeText">Works from mobile phones across Europe.</p>
-          </div>
-        </article>
+      <section class="urgent-section" id="urgent" aria-labelledby="urgentTitle">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="urgentEyebrow">Use official numbers first</p>
+          <h2 id="urgentTitle" data-i18n="urgentTitle">Urgent help in France</h2>
+        </div>
+        <div class="urgent-strip" id="urgentGrid"></div>
       </section>
 
-      <section class="finder" id="finder">
-        <div class="panel intake-panel" aria-label="Support matcher">
-          <div class="section-heading">
-            <p class="eyebrow" data-i18n="matcherEyebrow">Personalize results</p>
-            <h2 data-i18n="matcherTitle">What do you need first?</h2>
+      <section class="finder" id="finder" aria-labelledby="finderTitle">
+        <div class="panel intake-panel">
+          <div class="section-heading compact-heading">
+            <p class="eyebrow" data-i18n="matcherEyebrow">Find help</p>
+            <h2 id="finderTitle" data-i18n="matcherTitle">Search by need, place, status, and language</h2>
+          </div>
+
+          <div class="search-row">
+            <label for="searchInput">
+              <span data-i18n="searchLabel">Search resources</span>
+              <input id="searchInput" type="search" placeholder="Dublin, 115, health, appeal..." />
+            </label>
           </div>
 
           <div class="control-grid">
-            <label>
-              <span data-i18n="regionLabel">Where are you?</span>
-              <select id="regionFilter">
-                <option value="all">Anywhere in France</option>
-                <option value="paris">Paris / Ile-de-France</option>
-                <option value="lyon">Lyon / Auvergne-Rhone-Alpes</option>
-                <option value="marseille">Marseille / Provence-Alpes-Cote d'Azur</option>
-                <option value="north">Northern France</option>
-                <option value="online">Online or phone</option>
-              </select>
-            </label>
-            <label>
-              <span data-i18n="needLabel">Main need</span>
-              <select id="needFilter">
-                <option value="all">All support</option>
-                <option value="legal">Asylum and legal help</option>
-                <option value="housing">Shelter and reception</option>
-                <option value="health">Health care</option>
-                <option value="welfare">Money and welfare</option>
-                <option value="food">Food and clothing</option>
-                <option value="language">French classes and integration</option>
-                <option value="family">Women, children, family safety</option>
-              </select>
-            </label>
-            <label>
-              <span data-i18n="statusLabel">Your situation</span>
-              <select id="statusFilter">
-                <option value="all">Not sure / any</option>
-                <option value="new-arrival">Just arrived</option>
-                <option value="appointment">Need GUDA/SPADA/OFPRA steps</option>
-                <option value="dublin">Dublin procedure concern</option>
-                <option value="minor">Under 18 or with children</option>
-                <option value="appeal">Refusal or appeal</option>
-              </select>
-            </label>
+            <label for="needFilter"><span data-i18n="needLabel">Need</span><select id="needFilter"></select></label>
+            <label for="regionFilter"><span data-i18n="regionLabel">Area</span><select id="regionFilter"></select></label>
+            <label for="statusFilter"><span data-i18n="statusLabel">Situation</span><select id="statusFilter"></select></label>
+            <label for="urgencyFilter"><span data-i18n="urgencyLabel">Urgency</span><select id="urgencyFilter"></select></label>
+            <label for="languageFilter"><span data-i18n="languageLabel">Language</span><select id="languageFilter"></select></label>
+            <label for="typeFilter"><span data-i18n="typeLabel">Access</span><select id="typeFilter"></select></label>
+            <label for="qualityFilter"><span data-i18n="qualityLabel">Data quality</span><select id="qualityFilter"></select></label>
+            <label for="costFilter"><span data-i18n="costLabel">Cost</span><select id="costFilter"></select></label>
           </div>
-
-          <fieldset class="urgency-group" aria-label="Urgency">
-            <legend data-i18n="urgencyLabel">How urgent is it?</legend>
-            <label><input type="radio" name="urgency" value="all" checked /> Any</label>
-            <label><input type="radio" name="urgency" value="today" /> Today</label>
-            <label><input type="radio" name="urgency" value="week" /> This week</label>
-            <label><input type="radio" name="urgency" value="plan" /> Planning ahead</label>
-          </fieldset>
         </div>
 
-        <aside class="panel plan-panel" aria-label="Saved action plan">
-          <div class="section-heading">
-            <p class="eyebrow" data-i18n="planEyebrow">Your plan</p>
-            <h2 data-i18n="planTitle">Saved next steps</h2>
+        <aside class="panel plan-panel" id="plan" aria-labelledby="planTitle">
+          <div class="section-heading compact-heading">
+            <p class="eyebrow" data-i18n="planEyebrow">Private on this device</p>
+            <h2 id="planTitle" data-i18n="planTitle">Saved plan</h2>
           </div>
+          <p class="small-copy" data-i18n="planPrivacy">Saved items stay in this browser only. Do not save names, case facts, or identity details.</p>
           <ol id="savedPlan" class="saved-plan"></ol>
-          <button class="secondary-button full-width" id="clearPlan" type="button" data-i18n="clearPlan">Clear plan</button>
+          <div class="plan-actions">
+            <button class="secondary-button" id="printPlan" type="button" data-i18n="printPlan">Print plan</button>
+            <button class="secondary-button" id="clearPlan" type="button" data-i18n="clearPlan">Clear plan</button>
+          </div>
         </aside>
       </section>
 
-      <section class="workflow" aria-label="First week checklist">
+      <section class="workflow" aria-labelledby="workflowTitle">
         <div class="section-heading">
           <p class="eyebrow" data-i18n="workflowEyebrow">First week checklist</p>
-          <h2 data-i18n="workflowTitle">The usual route through the French asylum system</h2>
+          <h2 id="workflowTitle" data-i18n="workflowTitle">Common first steps</h2>
         </div>
         <div class="steps" id="steps"></div>
       </section>
 
-      <section class="resources-section" aria-live="polite">
+      <section class="resources-section" aria-labelledby="resourcesTitle">
         <div class="results-header">
           <div>
             <p class="eyebrow" data-i18n="resourcesEyebrow">Matched resources</p>
-            <h2 id="resultCount">Resources</h2>
+            <h2 id="resourcesTitle"><span id="resultCount">0</span></h2>
           </div>
-          <div class="search-box">
-            <label for="searchInput" data-i18n="searchLabel">Search</label>
-            <input id="searchInput" type="search" placeholder="Dublin, health, appeal..." />
-          </div>
+          <a class="report-link" href="mailto:hello@example.com?subject=Bienvenue%20Aid%20outdated%20resource" data-i18n="reportLink">Report outdated information</a>
         </div>
-        <div class="resource-grid" id="resourceGrid"></div>
-      </section>
-
-      <section class="panel disclaimer">
-        <h2 data-i18n="disclaimerTitle">Important note</h2>
-        <p data-i18n="disclaimerText">
-          This app helps organize public information and contact points. It is not legal advice. Asylum deadlines can be short, so confirm your situation with a qualified legal worker, association, SPADA, or lawyer.
-        </p>
+        <div class="resource-grid" id="resourceGrid" aria-live="polite"></div>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Bienvenue Aid</strong>
+        <p data-i18n="footerDisclaimer">
+          This app organizes public information. It is not legal advice, not a government service, and does not collect personal case details.
+        </p>
+      </div>
+      <div>
+        <p><span data-i18n="lastDataUpdate">Last data update</span>: <span id="lastDataUpdate">Unknown</span></p>
+        <p><a href="SOURCES.md">SOURCES.md</a> · <a href="DATA_QUALITY.md">DATA_QUALITY.md</a></p>
+      </div>
+    </footer>
 
     <script src="app.js"></script>
   </body>

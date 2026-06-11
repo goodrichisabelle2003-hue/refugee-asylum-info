@@ -1,161 +1,22 @@
-const resources = [
-  {
-    name: "SPADA orientation desk",
-    type: "First reception",
-    needs: ["legal", "housing", "welfare"],
-    regions: ["all"],
-    status: ["new-arrival", "appointment"],
-    urgency: "today",
-    summary:
-      "The usual first stop to register an intention to seek asylum, get orientation toward GUDA, and receive basic administrative support.",
-    nextStep: "Ask for the nearest SPADA and keep every appointment paper, SMS, and proof of address.",
-    link: "https://www.service-public.fr/particuliers/vosdroits/F32454",
-    source: "Service-Public.fr",
+const RESOURCE_URL = "data/resources.json";
+const PLAN_KEY = "bienvenueAidPlan";
+
+const state = {
+  resources: [],
+  filters: {
+    query: "",
+    need: "all",
+    region: "all",
+    status: "all",
+    urgency: "all",
+    language: "all",
+    type: "all",
+    quality: "all",
+    cost: "all",
   },
-  {
-    name: "OFPRA asylum application",
-    type: "Asylum procedure",
-    needs: ["legal"],
-    regions: ["all", "online"],
-    status: ["appointment", "appeal", "dublin"],
-    urgency: "week",
-    summary:
-      "Official asylum authority for submitting the file, interview steps, protection decisions, and procedure information.",
-    nextStep: "Prepare identity papers, journey facts, evidence, and a clear timeline before any appointment.",
-    link: "https://www.ofpra.gouv.fr/",
-    source: "OFPRA",
-  },
-  {
-    name: "OFII reception conditions",
-    type: "Welfare and housing",
-    needs: ["housing", "welfare"],
-    regions: ["all", "online"],
-    status: ["new-arrival", "appointment"],
-    urgency: "week",
-    summary:
-      "Handles material reception conditions for eligible asylum seekers, including accommodation orientation and the ADA allowance.",
-    nextStep: "Ask whether you accepted material reception conditions and how to access the OFII online services or local office.",
-    link: "https://www.ofii.fr/",
-    source: "OFII",
-  },
-  {
-    name: "Emergency shelter line",
-    type: "Tonight shelter",
-    needs: ["housing"],
-    regions: ["all"],
-    status: ["new-arrival", "minor"],
-    urgency: "today",
-    summary:
-      "Call 115 if you have no safe place to sleep. Families, pregnant people, children, and vulnerable people should say this clearly.",
-    nextStep: "Call 115, state your city, number of people, ages of children, and any health or safety risks.",
-    link: "https://www.service-public.fr/particuliers/vosdroits/F33645",
-    source: "Service-Public.fr",
-  },
-  {
-    name: "Health coverage through Assurance Maladie",
-    type: "Health care",
-    needs: ["health"],
-    regions: ["all", "online"],
-    status: ["new-arrival", "appointment", "minor"],
-    urgency: "week",
-    summary:
-      "Information on applying for French health coverage and getting care while your administrative situation is being reviewed.",
-    nextStep: "Gather proof of identity, address or domiciliation, and asylum procedure documents before applying.",
-    link: "https://www.ameli.fr/",
-    source: "Ameli",
-  },
-  {
-    name: "La Cimade",
-    type: "Legal association",
-    needs: ["legal", "family"],
-    regions: ["all", "paris", "lyon", "marseille", "north"],
-    status: ["dublin", "appeal", "appointment"],
-    urgency: "week",
-    summary:
-      "Association offering legal information and support for migrants and asylum seekers through local teams and hotlines.",
-    nextStep: "Find the nearest permanence and bring every prefecture, OFPRA, CNDA, or Dublin document.",
-    link: "https://www.lacimade.org/",
-    source: "La Cimade",
-  },
-  {
-    name: "France terre d'asile",
-    type: "Reception and integration",
-    needs: ["legal", "housing", "language", "family"],
-    regions: ["all", "paris", "north"],
-    status: ["new-arrival", "appointment", "minor"],
-    urgency: "week",
-    summary:
-      "Supports asylum seekers and refugees with reception, rights access, accommodation programs, and integration services.",
-    nextStep: "Contact the relevant local service and ask which documents are needed for an appointment.",
-    link: "https://www.france-terre-asile.org/",
-    source: "France terre d'asile",
-  },
-  {
-    name: "GISTI legal information",
-    type: "Specialized legal guidance",
-    needs: ["legal"],
-    regions: ["online"],
-    status: ["dublin", "appeal", "appointment"],
-    urgency: "plan",
-    summary:
-      "Publishes detailed legal resources on foreign nationals' rights, asylum, residence, appeals, and social rights.",
-    nextStep: "Use it to prepare questions for a lawyer or association rather than relying on it alone.",
-    link: "https://www.gisti.org/",
-    source: "GISTI",
-  },
-  {
-    name: "Restos du Coeur",
-    type: "Food and essentials",
-    needs: ["food"],
-    regions: ["all", "paris", "lyon", "marseille", "north"],
-    status: ["new-arrival", "minor"],
-    urgency: "today",
-    summary:
-      "Food assistance and basic support through local centers. Conditions and opening times vary by city.",
-    nextStep: "Search your local center and ask what proof or registration is required before going.",
-    link: "https://www.restosducoeur.org/",
-    source: "Restos du Coeur",
-  },
-  {
-    name: "Croix-Rouge francaise",
-    type: "Emergency and social aid",
-    needs: ["food", "health", "family"],
-    regions: ["all", "paris", "lyon", "marseille", "north"],
-    status: ["new-arrival", "minor"],
-    urgency: "today",
-    summary:
-      "Local teams may provide emergency aid, social support, first aid, food, clothing, or orientation depending on the area.",
-    nextStep: "Look up your departmental delegation and ask about migrant support or social assistance hours.",
-    link: "https://www.croix-rouge.fr/",
-    source: "Croix-Rouge francaise",
-  },
-  {
-    name: "Secours Catholique",
-    type: "Local welfare support",
-    needs: ["food", "language", "welfare", "family"],
-    regions: ["all", "paris", "lyon", "marseille", "north"],
-    status: ["new-arrival", "minor"],
-    urgency: "week",
-    summary:
-      "Local welcome centers can help with material aid, listening, French conversation, and links to social services.",
-    nextStep: "Contact the local delegation and ask for accueil migrants or accueil social.",
-    link: "https://www.secours-catholique.org/",
-    source: "Secours Catholique",
-  },
-  {
-    name: "Refugee.info France",
-    type: "Multilingual information",
-    needs: ["legal", "health", "housing", "welfare", "language"],
-    regions: ["online"],
-    status: ["new-arrival", "appointment", "dublin", "appeal", "minor"],
-    urgency: "plan",
-    summary:
-      "Plain-language information for displaced people in France, with multilingual guides and service orientation.",
-    nextStep: "Search your topic and verify any deadline-sensitive advice with a local legal worker.",
-    link: "https://www.refugee.info/fr-fr",
-    source: "Refugee.info",
-  },
-];
+  language: "en",
+  saved: readSavedPlan(),
+};
 
 const steps = [
   {
@@ -164,11 +25,11 @@ const steps = [
   },
   {
     title: "Register and keep proof",
-    text: "Attend GUDA/prefecture appointments, keep documents safe, and ask what deadline applies next.",
+    text: "Attend official appointments, keep documents safe, and ask what deadline applies next.",
   },
   {
     title: "Secure basic needs",
-    text: "Ask OFII/SPADA about accommodation, ADA, domiciliation, health coverage, and emergency shelter.",
+    text: "Ask about accommodation, welfare support, domiciliation, health coverage, and emergency shelter.",
   },
   {
     title: "Prepare your story",
@@ -178,260 +39,492 @@ const steps = [
 
 const translations = {
   en: {
+    skipLink: "Skip to find help",
+    navUrgent: "Urgent help",
+    navFind: "Find help",
+    navPlan: "Saved plan",
     eyebrow: "France asylum support navigator",
-    heroTitle: "Find legal, housing, health, and welfare help in France.",
-    heroText: "Answer a few questions and build a practical action plan for the first days after arriving in France.",
-    startButton: "Start matching",
-    urgentButton: "I need urgent help",
-    medicalTitle: "Medical emergency",
-    medicalText: "Call SAMU for urgent medical danger.",
-    policeTitle: "Immediate danger",
-    policeText: "Call police or gendarmerie if someone is at risk.",
-    shelterTitle: "No safe place tonight",
-    shelterText: "Call emergency social accommodation.",
-    europeTitle: "European emergency",
-    europeText: "Works from mobile phones across Europe.",
-    matcherEyebrow: "Personalize results",
-    matcherTitle: "What do you need first?",
-    regionLabel: "Where are you?",
-    needLabel: "Main need",
-    statusLabel: "Your situation",
-    urgencyLabel: "How urgent is it?",
-    planEyebrow: "Your plan",
-    planTitle: "Saved next steps",
+    heroTitle: "Find reliable asylum, legal, health, and welfare help in France.",
+    heroText: "Search verified public information and nonprofit support without entering personal case details.",
+    startButton: "Find help",
+    urgentButton: "Emergency numbers",
+    translationNote: "UI labels are translated. Resource details remain in the verified source language unless reviewed translation is available.",
+    urgentEyebrow: "Use official numbers first",
+    urgentTitle: "Urgent help in France",
+    matcherEyebrow: "Find help",
+    matcherTitle: "Search by need, place, status, and language",
+    searchLabel: "Search resources",
+    needLabel: "Need",
+    regionLabel: "Area",
+    statusLabel: "Situation",
+    urgencyLabel: "Urgency",
+    languageLabel: "Language",
+    typeLabel: "Access",
+    qualityLabel: "Data quality",
+    costLabel: "Cost",
+    planEyebrow: "Private on this device",
+    planTitle: "Saved plan",
+    planPrivacy: "Saved items stay in this browser only. Do not save names, case facts, or identity details.",
+    printPlan: "Print plan",
     clearPlan: "Clear plan",
     workflowEyebrow: "First week checklist",
-    workflowTitle: "The usual route through the French asylum system",
+    workflowTitle: "Common first steps",
     resourcesEyebrow: "Matched resources",
-    searchLabel: "Search",
-    disclaimerTitle: "Important note",
-    disclaimerText:
-      "This app helps organize public information and contact points. It is not legal advice. Asylum deadlines can be short, so confirm your situation with a qualified legal worker, association, SPADA, or lawyer.",
+    reportLink: "Report outdated information",
+    footerDisclaimer: "This app organizes public information. It is not legal advice, not a government service, and does not collect personal case details.",
+    lastDataUpdate: "Last data update",
+    emptyPlan: "Save resources to build a simple checklist.",
+    noResults: "No exact matches. Try clearing a filter, choosing national/online resources, or searching a broader word.",
+    loading: "Loading verified resources...",
+    loadError: "Could not load resource data. If you opened the file directly, run a local web server and try again.",
+    all: "All",
+    results: "resources",
+    result: "resource",
+    showDetails: "Show details",
+    hideDetails: "Hide details",
+    save: "Save to plan",
+    remove: "Remove from plan",
+    source: "Source",
+    lastVerified: "Last verified",
+    nextStep: "Next step",
+    eligibility: "Eligibility",
+    cost: "Cost",
+    languages: "Languages",
+    serviceArea: "Service area",
+    dataQuality: "Data quality",
+    website: "Open source",
   },
   fr: {
+    skipLink: "Aller a la recherche d'aide",
+    navUrgent: "Aide urgente",
+    navFind: "Trouver de l'aide",
+    navPlan: "Plan sauvegarde",
     eyebrow: "Orientation asile en France",
-    heroTitle: "Trouvez de l'aide juridique, sociale, sante et hebergement en France.",
-    heroText: "Repondez a quelques questions et creez un plan d'action pour les premiers jours en France.",
-    startButton: "Commencer",
-    urgentButton: "Aide urgente",
-    medicalTitle: "Urgence medicale",
-    medicalText: "Appelez le SAMU en cas de danger medical.",
-    policeTitle: "Danger immediat",
-    policeText: "Appelez la police ou la gendarmerie si quelqu'un est en danger.",
-    shelterTitle: "Pas d'abri ce soir",
-    shelterText: "Appelez l'hebergement social d'urgence.",
-    europeTitle: "Urgence Europe",
-    europeText: "Fonctionne depuis les telephones mobiles en Europe.",
-    matcherEyebrow: "Resultats personnalises",
-    matcherTitle: "De quoi avez-vous besoin en premier ?",
-    regionLabel: "Ou etes-vous ?",
-    needLabel: "Besoin principal",
-    statusLabel: "Votre situation",
-    urgencyLabel: "Quel niveau d'urgence ?",
-    planEyebrow: "Votre plan",
-    planTitle: "Prochaines etapes",
-    clearPlan: "Effacer le plan",
+    heroTitle: "Trouvez une aide fiable pour l'asile, le droit, la sante et le social en France.",
+    heroText: "Cherchez des informations publiques verifiees et des soutiens associatifs sans entrer de details personnels.",
+    startButton: "Trouver de l'aide",
+    urgentButton: "Numeros d'urgence",
+    translationNote: "Les libelles de l'interface sont traduits. Les details des ressources restent dans la langue verifiee de la source sauf traduction relue.",
+    urgentEyebrow: "Utilisez d'abord les numeros officiels",
+    urgentTitle: "Aide urgente en France",
+    matcherEyebrow: "Trouver de l'aide",
+    matcherTitle: "Chercher par besoin, lieu, situation et langue",
+    searchLabel: "Rechercher",
+    needLabel: "Besoin",
+    regionLabel: "Zone",
+    statusLabel: "Situation",
+    urgencyLabel: "Urgence",
+    languageLabel: "Langue",
+    typeLabel: "Acces",
+    qualityLabel: "Qualite des donnees",
+    costLabel: "Cout",
+    planEyebrow: "Prive sur cet appareil",
+    planTitle: "Plan sauvegarde",
+    planPrivacy: "Les elements sauvegardes restent dans ce navigateur. Ne sauvegardez pas de noms, faits du dossier ou identite.",
+    printPlan: "Imprimer",
+    clearPlan: "Effacer",
     workflowEyebrow: "Premiere semaine",
-    workflowTitle: "Le parcours habituel dans le systeme d'asile francais",
-    resourcesEyebrow: "Ressources proposees",
-    searchLabel: "Recherche",
-    disclaimerTitle: "Note importante",
-    disclaimerText:
-      "Cette application organise des informations publiques et des contacts. Ce n'est pas un conseil juridique. Les delais d'asile peuvent etre courts : confirmez votre situation avec un juriste, une association, une SPADA ou un avocat.",
+    workflowTitle: "Premieres etapes courantes",
+    resourcesEyebrow: "Ressources trouvees",
+    reportLink: "Signaler une information perimee",
+    footerDisclaimer: "Cette application organise des informations publiques. Ce n'est pas un conseil juridique, ni un service gouvernemental, et elle ne collecte pas de details personnels.",
+    lastDataUpdate: "Derniere mise a jour des donnees",
+    emptyPlan: "Sauvegardez des ressources pour creer une liste simple.",
+    noResults: "Aucun resultat exact. Supprimez un filtre, choisissez national/en ligne, ou cherchez un terme plus large.",
+    loading: "Chargement des ressources verifiees...",
+    loadError: "Impossible de charger les donnees. Si vous avez ouvert le fichier directement, lancez un serveur local.",
+    all: "Tout",
+    results: "ressources",
+    result: "ressource",
+    showDetails: "Voir les details",
+    hideDetails: "Masquer les details",
+    save: "Sauvegarder",
+    remove: "Retirer",
+    source: "Source",
+    lastVerified: "Verifie le",
+    nextStep: "Prochaine etape",
+    eligibility: "Eligibilite",
+    cost: "Cout",
+    languages: "Langues",
+    serviceArea: "Zone couverte",
+    dataQuality: "Qualite",
+    website: "Ouvrir la source",
   },
   dr: {
+    skipLink: "رفتن به بخش یافتن کمک",
+    navUrgent: "کمک فوری",
+    navFind: "یافتن کمک",
+    navPlan: "برنامه ذخیره‌شده",
     eyebrow: "راهنمای حمایت پناهندگی در فرانسه",
-    heroTitle: "کمک حقوقی، مسکن، صحت و رفاه را در فرانسه پیدا کنید.",
-    heroText: "به چند پرسش پاسخ دهید و برای روزهای اول ورود به فرانسه یک برنامه عملی بسازید.",
-    startButton: "شروع جستجو",
-    urgentButton: "به کمک فوری نیاز دارم",
-    medicalTitle: "فوریت طبی",
-    medicalText: "در خطر جدی صحی با سامو تماس بگیرید.",
-    policeTitle: "خطر فوری",
-    policeText: "اگر کسی در خطر است با پولیس یا ژاندارمری تماس بگیرید.",
-    shelterTitle: "امشب جای امن ندارید",
-    shelterText: "برای سرپناه اضطراری اجتماعی تماس بگیرید.",
-    europeTitle: "شماره اضطراری اروپا",
-    europeText: "از تیلفون همراه در سراسر اروپا کار می‌کند.",
-    matcherEyebrow: "نتایج شخصی‌سازی‌شده",
-    matcherTitle: "اول به چه چیزی نیاز دارید؟",
-    regionLabel: "کجا هستید؟",
-    needLabel: "نیاز اصلی",
-    statusLabel: "وضعیت شما",
-    urgencyLabel: "چقدر فوری است؟",
-    planEyebrow: "برنامه شما",
-    planTitle: "گام‌های بعدی ذخیره‌شده",
-    clearPlan: "پاک کردن برنامه",
+    heroTitle: "کمک قابل اعتماد برای پناهندگی، حقوق، صحت و رفاه در فرانسه پیدا کنید.",
+    heroText: "معلومات عمومی بررسی‌شده و حمایت انجمن‌ها را بدون وارد کردن جزئیات شخصی جستجو کنید.",
+    startButton: "یافتن کمک",
+    urgentButton: "شماره‌های اضطراری",
+    translationNote: "برچسب‌های برنامه ترجمه شده‌اند. جزئیات منابع تا زمان بازبینی ترجمه، به زبان منبع معتبر نشان داده می‌شود.",
+    urgentEyebrow: "اول از شماره‌های رسمی استفاده کنید",
+    urgentTitle: "کمک فوری در فرانسه",
+    matcherEyebrow: "یافتن کمک",
+    matcherTitle: "براساس نیاز، محل، وضعیت و زبان جستجو کنید",
+    searchLabel: "جستجوی منابع",
+    needLabel: "نیاز",
+    regionLabel: "منطقه",
+    statusLabel: "وضعیت",
+    urgencyLabel: "فوریت",
+    languageLabel: "زبان",
+    typeLabel: "روش دسترسی",
+    qualityLabel: "کیفیت معلومات",
+    costLabel: "هزینه",
+    planEyebrow: "خصوصی در همین دستگاه",
+    planTitle: "برنامه ذخیره‌شده",
+    planPrivacy: "موارد ذخیره‌شده فقط در همین مرورگر می‌ماند. نام، جزئیات پرونده یا هویت را ذخیره نکنید.",
+    printPlan: "چاپ برنامه",
+    clearPlan: "پاک کردن",
     workflowEyebrow: "فهرست هفته اول",
-    workflowTitle: "مسیر معمول در سیستم پناهندگی فرانسه",
+    workflowTitle: "گام‌های معمول اول",
     resourcesEyebrow: "منابع پیشنهادی",
-    searchLabel: "جستجو",
-    disclaimerTitle: "یادداشت مهم",
-    disclaimerText:
-      "این برنامه معلومات عمومی و راه‌های تماس را منظم می‌کند. این مشوره حقوقی نیست. مهلت‌های پناهندگی می‌تواند کوتاه باشد، پس وضعیت خود را با یک کارمند حقوقی، انجمن، سپادا یا وکیل تایید کنید.",
+    reportLink: "گزارش معلومات قدیمی",
+    footerDisclaimer: "این برنامه معلومات عمومی را منظم می‌کند. مشوره حقوقی نیست، خدمات دولتی نیست و جزئیات شخصی جمع‌آوری نمی‌کند.",
+    lastDataUpdate: "آخرین به‌روزرسانی معلومات",
+    emptyPlan: "منابع را ذخیره کنید تا یک فهرست ساده بسازید.",
+    noResults: "نتیجه دقیق پیدا نشد. یک فیلتر را پاک کنید، منابع ملی/آنلاین را انتخاب کنید، یا کلمه عمومی‌تر جستجو کنید.",
+    loading: "در حال بارگذاری منابع بررسی‌شده...",
+    loadError: "معلومات منابع بارگذاری نشد. اگر فایل را مستقیم باز کرده‌اید، یک سرور محلی اجرا کنید.",
+    all: "همه",
+    results: "منبع",
+    result: "منبع",
+    showDetails: "نمایش جزئیات",
+    hideDetails: "پنهان کردن جزئیات",
+    save: "ذخیره در برنامه",
+    remove: "حذف از برنامه",
+    source: "منبع",
+    lastVerified: "آخرین بررسی",
+    nextStep: "گام بعدی",
+    eligibility: "شرایط استفاده",
+    cost: "هزینه",
+    languages: "زبان‌ها",
+    serviceArea: "منطقه خدمات",
+    dataQuality: "کیفیت معلومات",
+    website: "باز کردن منبع",
   },
 };
 
 const languageOrder = ["en", "fr", "dr"];
-const languageLabels = {
-  en: "FR",
-  fr: "DR",
-  dr: "EN",
+const languageNames = { en: "English", fr: "Français", dr: "دری" };
+const urgencyRank = { today: 0, week: 1, plan: 2 };
+const sourceRank = { emergency: 0, official: 1, nonprofit: 2, "legal-information": 3, directory: 4, other: 5 };
+
+const nodes = {
+  resourceGrid: document.querySelector("#resourceGrid"),
+  urgentGrid: document.querySelector("#urgentGrid"),
+  resultCount: document.querySelector("#resultCount"),
+  savedPlan: document.querySelector("#savedPlan"),
+  languageToggle: document.querySelector("#languageToggle"),
+  lastDataUpdate: document.querySelector("#lastDataUpdate"),
 };
 
-const filters = {
-  region: "all",
-  need: "all",
-  status: "all",
-  urgency: "all",
-  query: "",
-};
+function t(key) {
+  return translations[state.language][key] || translations.en[key] || key;
+}
 
-let language = "en";
-let saved = JSON.parse(localStorage.getItem("bienvenueAidPlan") || "[]");
+function readSavedPlan() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(PLAN_KEY) || "[]");
+    return Array.isArray(parsed) ? parsed.filter((id) => typeof id === "string") : [];
+  } catch {
+    return [];
+  }
+}
 
-const resourceGrid = document.querySelector("#resourceGrid");
-const resultCount = document.querySelector("#resultCount");
-const savedPlan = document.querySelector("#savedPlan");
-const languageToggle = document.querySelector("#languageToggle");
+function persistPlan() {
+  localStorage.setItem(PLAN_KEY, JSON.stringify(state.saved));
+}
 
-function matchesFilter(resource) {
-  const queryText = `${resource.name} ${resource.type} ${resource.summary} ${resource.nextStep} ${resource.source}`.toLowerCase();
+function el(tag, options = {}, children = []) {
+  const node = document.createElement(tag);
+  Object.entries(options).forEach(([key, value]) => {
+    if (value === undefined || value === null || value === "") return;
+    if (key === "className") node.className = value;
+    else if (key === "text") node.textContent = value;
+    else if (key === "htmlFor") node.htmlFor = value;
+    else if (key.startsWith("aria")) node.setAttribute(key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`), value);
+    else node.setAttribute(key, value);
+  });
+  const childList = Array.isArray(children) ? children : [children];
+  childList.filter(Boolean).forEach((child) => node.append(child));
+  return node;
+}
+
+function formatList(items) {
+  return Array.isArray(items) && items.length ? items.join(", ") : "Unknown";
+}
+
+function normalize(value) {
+  return String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function matchesArray(resource, field, value) {
+  if (value === "all") return true;
+  return Array.isArray(resource[field]) && resource[field].map(normalize).includes(normalize(value));
+}
+
+function searchableText(resource) {
+  return normalize([
+    resource.name,
+    resource.category,
+    resource.summary,
+    resource.description,
+    resource.service_area,
+    resource.eligibility,
+    resource.cost,
+    resource.source_name,
+    resource.next_step,
+    ...(resource.needs || []),
+    ...(resource.statuses || []),
+    ...(resource.regions || []),
+    ...(resource.cities || []),
+    ...(resource.languages || []),
+  ].join(" "));
+}
+
+function matchesFilters(resource) {
+  const query = normalize(state.filters.query);
+  const serviceAreaMatch = state.filters.region === "all" ||
+    matchesArray(resource, "regions", state.filters.region) ||
+    matchesArray(resource, "cities", state.filters.region) ||
+    normalize(resource.service_area).includes(normalize(state.filters.region));
   return (
-    (filters.region === "all" || resource.regions.includes(filters.region) || resource.regions.includes("all")) &&
-    (filters.need === "all" || resource.needs.includes(filters.need)) &&
-    (filters.status === "all" || resource.status.includes(filters.status)) &&
-    (filters.urgency === "all" || resource.urgency === filters.urgency || resource.urgency === "today") &&
-    (!filters.query || queryText.includes(filters.query))
+    (!query || searchableText(resource).includes(query)) &&
+    matchesArray(resource, "needs", state.filters.need) &&
+    serviceAreaMatch &&
+    matchesArray(resource, "statuses", state.filters.status) &&
+    (state.filters.urgency === "all" || resource.urgency === state.filters.urgency) &&
+    matchesArray(resource, "languages", state.filters.language) &&
+    matchesArray(resource, "resource_type", state.filters.type) &&
+    (state.filters.quality === "all" || resource.data_quality === state.filters.quality) &&
+    (state.filters.cost === "all" || normalize(resource.cost) === normalize(state.filters.cost))
   );
 }
 
-function renderResources() {
-  const visible = resources.filter(matchesFilter);
-  resultCount.textContent = `${visible.length} resource${visible.length === 1 ? "" : "s"}`;
-  resourceGrid.innerHTML = "";
+function scoreResource(resource) {
+  let score = 0;
+  if (state.filters.urgency === "today" && resource.urgency === "today") score -= 100;
+  if (state.filters.need !== "all" && matchesArray(resource, "needs", state.filters.need)) score -= 35;
+  if (state.filters.status !== "all" && matchesArray(resource, "statuses", state.filters.status)) score -= 25;
+  if (resource.data_quality === "Verified") score -= 18;
+  if (resource.source_type === "official" || resource.source_type === "emergency") score -= 12;
+  if (state.filters.region === "all" && (resource.regions || []).some((r) => ["national", "online"].includes(r))) score -= 8;
+  score += urgencyRank[resource.urgency] ?? 5;
+  score += sourceRank[resource.source_type] ?? 9;
+  return score;
+}
 
-  if (!visible.length) {
-    resourceGrid.innerHTML = '<p class="no-results">No exact matches. Try clearing one filter or search by city, document, or need.</p>';
-    return;
-  }
+function filteredResources() {
+  return state.resources.filter(matchesFilters).sort((a, b) => scoreResource(a) - scoreResource(b) || a.name.localeCompare(b.name));
+}
 
-  visible.forEach((resource) => {
-    const card = document.createElement("article");
-    card.className = "resource-card";
-    const tags = [resource.type, resource.urgency === "today" ? "Urgent" : resource.urgency, resource.regions.includes("online") ? "Online" : "Local"];
-    card.innerHTML = `
-      <div class="resource-topline">
-        <div>
-          <h3>${resource.name}</h3>
-          <p>${resource.summary}</p>
-        </div>
-      </div>
-      <div class="tag-list">
-        ${tags.map((tag) => `<span class="tag ${tag === "Urgent" ? "urgent" : tag === "Online" ? "online" : ""}">${tag}</span>`).join("")}
-      </div>
-      <p><strong>Next:</strong> ${resource.nextStep}</p>
-      <p>Source: <a href="${resource.link}" target="_blank" rel="noopener noreferrer">${resource.source}</a></p>
-      <div class="card-actions">
-        <button type="button" data-save="${resource.name}">Add next step</button>
-      </div>
-    `;
-    resourceGrid.append(card);
+function setOptions(selectId, options) {
+  const select = document.querySelector(`#${selectId}`);
+  select.replaceChildren();
+  options.forEach(({ value, label }) => select.append(el("option", { value, text: label })));
+}
+
+function uniqueFrom(field) {
+  const set = new Set();
+  state.resources.forEach((resource) => {
+    const value = resource[field];
+    if (Array.isArray(value)) value.forEach((item) => item && set.add(item));
+    else if (value) set.add(value);
   });
+  return [...set].sort((a, b) => a.localeCompare(b));
+}
+
+function populateFilters() {
+  setOptions("needFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("needs").map((value) => ({ value, label: value }))]);
+  const areas = new Set(["national", "online"]);
+  state.resources.forEach((resource) => [...(resource.regions || []), ...(resource.cities || [])].forEach((item) => item && areas.add(item)));
+  setOptions("regionFilter", [{ value: "all", label: t("all") }, ...[...areas].sort().map((value) => ({ value, label: value }))]);
+  setOptions("statusFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("statuses").map((value) => ({ value, label: value }))]);
+  setOptions("urgencyFilter", ["all", "today", "week", "plan"].map((value) => ({ value, label: value === "all" ? t("all") : value })));
+  setOptions("languageFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("languages").map((value) => ({ value, label: value }))]);
+  setOptions("typeFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("resource_type").map((value) => ({ value, label: value }))]);
+  setOptions("qualityFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("data_quality").map((value) => ({ value, label: value }))]);
+  setOptions("costFilter", [{ value: "all", label: t("all") }, ...uniqueFrom("cost").map((value) => ({ value, label: value }))]);
+  Object.entries(state.filters).forEach(([key, value]) => {
+    const node = document.querySelector(`#${key}Filter`);
+    if (node) node.value = value;
+  });
+}
+
+function renderUrgentResources() {
+  const urgent = state.resources.filter((resource) => resource.urgency === "today").slice(0, 5);
+  nodes.urgentGrid.replaceChildren(...urgent.map((resource) => {
+    const article = el("article", { className: "urgent-card" });
+    article.append(
+      el("span", { className: "urgent-number", text: resource.phone || "!" }),
+      el("div", {}, [
+        el("h3", { text: resource.name }),
+        el("p", { text: resource.summary }),
+      ])
+    );
+    return article;
+  }));
 }
 
 function renderSteps() {
   const stepsNode = document.querySelector("#steps");
-  stepsNode.innerHTML = steps
-    .map(
-      (step, index) => `
-        <article class="step">
-          <strong>${index + 1}</strong>
-          <h3>${step.title}</h3>
-          <p>${step.text}</p>
-        </article>
-      `
-    )
-    .join("");
+  stepsNode.replaceChildren(...steps.map((step, index) => el("article", { className: "step" }, [
+    el("strong", { text: String(index + 1) }),
+    el("h3", { text: step.title }),
+    el("p", { text: step.text }),
+  ])));
+}
+
+function field(label, value) {
+  if (!value || (Array.isArray(value) && !value.length)) return null;
+  return el("p", { className: "resource-field" }, [el("strong", { text: `${label}: ` }), document.createTextNode(Array.isArray(value) ? formatList(value) : value)]);
+}
+
+function badge(text, modifier = "") {
+  return el("span", { className: `tag ${modifier}`, text });
+}
+
+function renderResourceCard(resource) {
+  const isSaved = state.saved.includes(resource.id);
+  const article = el("article", { className: "resource-card" });
+  const top = el("div", { className: "resource-topline" }, [
+    el("div", {}, [
+      el("p", { className: "eyebrow", text: resource.category }),
+      el("h3", { text: resource.name }),
+      el("p", { text: resource.summary }),
+    ]),
+  ]);
+  const tags = el("div", { className: "tag-list" }, [
+    badge(resource.urgency, resource.urgency === "today" ? "urgent" : ""),
+    badge(resource.data_quality, resource.data_quality === "Verified" ? "verified" : "review"),
+    badge(resource.source_type),
+    ...(resource.resource_type || []).map((type) => badge(type, type === "online" ? "online" : "")),
+  ]);
+  const details = el("details", { className: "resource-details" }, [
+    el("summary", { text: t("showDetails") }),
+    el("div", { className: "details-body" }, [
+      el("p", { text: resource.description }),
+      field(t("serviceArea"), resource.service_area),
+      field(t("eligibility"), resource.eligibility),
+      field(t("languages"), resource.languages),
+      field(t("cost"), resource.cost),
+      field("Hours", resource.hours),
+      field("Phone", resource.phone),
+      field("Email", resource.email),
+      field("Address", resource.address),
+      field(t("dataQuality"), resource.data_quality),
+      field("Verification notes", resource.verification_notes),
+    ].filter(Boolean)),
+  ]);
+  const source = el("p", { className: "source-line" }, [
+    el("strong", { text: `${t("source")}: ` }),
+    el("a", { href: resource.source_url, target: "_blank", rel: "noopener noreferrer", text: resource.source_name }),
+    document.createTextNode(` · ${t("lastVerified")}: ${resource.last_verified}`),
+  ]);
+  const next = field(t("nextStep"), resource.next_step);
+  const saveButton = el("button", { type: "button", className: isSaved ? "secondary-button" : "primary-button", text: isSaved ? t("remove") : t("save") });
+  saveButton.addEventListener("click", () => toggleSaved(resource.id));
+  const sourceLink = el("a", { className: "secondary-button", href: resource.website, target: "_blank", rel: "noopener noreferrer", text: t("website") });
+  article.append(top, tags, next, source, details, el("div", { className: "card-actions" }, [saveButton, sourceLink]));
+  return article;
+}
+
+function renderResources() {
+  const visible = filteredResources();
+  nodes.resultCount.textContent = `${visible.length} ${visible.length === 1 ? t("result") : t("results")}`;
+  if (!visible.length) {
+    nodes.resourceGrid.replaceChildren(el("p", { className: "no-results", text: t("noResults") }));
+    return;
+  }
+  nodes.resourceGrid.replaceChildren(...visible.map(renderResourceCard));
 }
 
 function renderPlan() {
-  if (!saved.length) {
-    savedPlan.innerHTML = '<li class="empty-plan">Add resources to create a simple appointment checklist.</li>';
+  if (!state.saved.length) {
+    nodes.savedPlan.replaceChildren(el("li", { className: "empty-plan", text: t("emptyPlan") }));
     return;
   }
-
-  savedPlan.innerHTML = saved.map((item) => `<li>${item}</li>`).join("");
+  const items = state.saved.map((id) => state.resources.find((resource) => resource.id === id)).filter(Boolean);
+  nodes.savedPlan.replaceChildren(...items.map((resource) => {
+    const remove = el("button", { type: "button", className: "text-button", text: t("remove") });
+    remove.addEventListener("click", () => toggleSaved(resource.id));
+    return el("li", {}, [
+      el("strong", { text: resource.name }),
+      el("p", { text: resource.next_step }),
+      remove,
+    ]);
+  }));
 }
 
-function savePlanItem(resourceName) {
-  const resource = resources.find((item) => item.name === resourceName);
-  if (!resource) return;
-  const item = `${resource.name}: ${resource.nextStep}`;
-  if (!saved.includes(item)) {
-    saved = [...saved, item];
-    localStorage.setItem("bienvenueAidPlan", JSON.stringify(saved));
-    renderPlan();
-  }
+function toggleSaved(id) {
+  state.saved = state.saved.includes(id) ? state.saved.filter((item) => item !== id) : [...state.saved, id];
+  persistPlan();
+  renderPlan();
+  renderResources();
 }
 
 function applyTranslations() {
-  document.documentElement.lang = language;
-  document.documentElement.dir = language === "dr" ? "rtl" : "ltr";
+  document.documentElement.lang = state.language === "dr" ? "fa-AF" : state.language;
+  document.documentElement.dir = state.language === "dr" ? "rtl" : "ltr";
   document.querySelectorAll("[data-i18n]").forEach((node) => {
-    const key = node.dataset.i18n;
-    node.textContent = translations[language][key] || translations.en[key] || node.textContent;
+    node.textContent = t(node.dataset.i18n);
   });
-  languageToggle.textContent = languageLabels[language];
+  const nextLanguage = languageOrder[(languageOrder.indexOf(state.language) + 1) % languageOrder.length];
+  nodes.languageToggle.textContent = languageNames[nextLanguage];
+  nodes.languageToggle.setAttribute("aria-label", `Switch language to ${languageNames[nextLanguage]}`);
+  populateFilters();
+  renderResources();
+  renderPlan();
 }
 
-document.querySelector("#regionFilter").addEventListener("change", (event) => {
-  filters.region = event.target.value;
-  renderResources();
-});
-
-document.querySelector("#needFilter").addEventListener("change", (event) => {
-  filters.need = event.target.value;
-  renderResources();
-});
-
-document.querySelector("#statusFilter").addEventListener("change", (event) => {
-  filters.status = event.target.value;
-  renderResources();
-});
-
-document.querySelectorAll('input[name="urgency"]').forEach((input) => {
-  input.addEventListener("change", (event) => {
-    filters.urgency = event.target.value;
+function bindFilters() {
+  document.querySelector("#searchInput").addEventListener("input", (event) => {
+    state.filters.query = event.target.value.trim();
     renderResources();
   });
-});
+  ["need", "region", "status", "urgency", "language", "type", "quality", "cost"].forEach((key) => {
+    document.querySelector(`#${key}Filter`).addEventListener("change", (event) => {
+      state.filters[key] = event.target.value;
+      renderResources();
+    });
+  });
+  document.querySelector("#clearPlan").addEventListener("click", () => {
+    state.saved = [];
+    persistPlan();
+    renderPlan();
+    renderResources();
+  });
+  document.querySelector("#printPlan").addEventListener("click", () => window.print());
+  nodes.languageToggle.addEventListener("click", () => {
+    const nextIndex = (languageOrder.indexOf(state.language) + 1) % languageOrder.length;
+    state.language = languageOrder[nextIndex];
+    applyTranslations();
+  });
+}
 
-document.querySelector("#searchInput").addEventListener("input", (event) => {
-  filters.query = event.target.value.trim().toLowerCase();
-  renderResources();
-});
-
-resourceGrid.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-save]");
-  if (button) {
-    savePlanItem(button.dataset.save);
+async function init() {
+  nodes.resourceGrid.replaceChildren(el("p", { className: "no-results", text: t("loading") }));
+  bindFilters();
+  renderSteps();
+  try {
+    const response = await fetch(RESOURCE_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    state.resources = await response.json();
+    const dates = state.resources.map((resource) => resource.last_verified).filter(Boolean).sort();
+    nodes.lastDataUpdate.textContent = dates.at(-1) || "Unknown";
+    populateFilters();
+    renderUrgentResources();
+    renderPlan();
+    renderResources();
+    applyTranslations();
+  } catch (error) {
+    console.error(error);
+    nodes.resourceGrid.replaceChildren(el("p", { className: "no-results", text: t("loadError") }));
   }
-});
+}
 
-document.querySelector("#clearPlan").addEventListener("click", () => {
-  saved = [];
-  localStorage.removeItem("bienvenueAidPlan");
-  renderPlan();
-});
-
-languageToggle.addEventListener("click", () => {
-  const nextIndex = (languageOrder.indexOf(language) + 1) % languageOrder.length;
-  language = languageOrder[nextIndex];
-  applyTranslations();
-});
-
-renderSteps();
-renderPlan();
-renderResources();
-applyTranslations();
+init();
