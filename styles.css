@@ -41,6 +41,29 @@ a {
   color: inherit;
 }
 
+[dir="rtl"] body {
+  text-align: right;
+}
+
+[dir="rtl"] .brand,
+[dir="rtl"] .topbar-actions,
+[dir="rtl"] .hero-actions,
+[dir="rtl"] .urgent-strip article,
+[dir="rtl"] .resource-topline,
+[dir="rtl"] .card-actions {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .saved-plan {
+  padding-right: 20px;
+  padding-left: 0;
+}
+
+[dir="rtl"] .empty-plan {
+  margin-right: -20px;
+  margin-left: 0;
+}
+
 .app-shell {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;

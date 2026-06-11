@@ -239,6 +239,44 @@ const translations = {
     disclaimerText:
       "Cette application organise des informations publiques et des contacts. Ce n'est pas un conseil juridique. Les delais d'asile peuvent etre courts : confirmez votre situation avec un juriste, une association, une SPADA ou un avocat.",
   },
+  dr: {
+    eyebrow: "راهنمای حمایت پناهندگی در فرانسه",
+    heroTitle: "کمک حقوقی، مسکن، صحت و رفاه را در فرانسه پیدا کنید.",
+    heroText: "به چند پرسش پاسخ دهید و برای روزهای اول ورود به فرانسه یک برنامه عملی بسازید.",
+    startButton: "شروع جستجو",
+    urgentButton: "به کمک فوری نیاز دارم",
+    medicalTitle: "فوریت طبی",
+    medicalText: "در خطر جدی صحی با سامو تماس بگیرید.",
+    policeTitle: "خطر فوری",
+    policeText: "اگر کسی در خطر است با پولیس یا ژاندارمری تماس بگیرید.",
+    shelterTitle: "امشب جای امن ندارید",
+    shelterText: "برای سرپناه اضطراری اجتماعی تماس بگیرید.",
+    europeTitle: "شماره اضطراری اروپا",
+    europeText: "از تیلفون همراه در سراسر اروپا کار می‌کند.",
+    matcherEyebrow: "نتایج شخصی‌سازی‌شده",
+    matcherTitle: "اول به چه چیزی نیاز دارید؟",
+    regionLabel: "کجا هستید؟",
+    needLabel: "نیاز اصلی",
+    statusLabel: "وضعیت شما",
+    urgencyLabel: "چقدر فوری است؟",
+    planEyebrow: "برنامه شما",
+    planTitle: "گام‌های بعدی ذخیره‌شده",
+    clearPlan: "پاک کردن برنامه",
+    workflowEyebrow: "فهرست هفته اول",
+    workflowTitle: "مسیر معمول در سیستم پناهندگی فرانسه",
+    resourcesEyebrow: "منابع پیشنهادی",
+    searchLabel: "جستجو",
+    disclaimerTitle: "یادداشت مهم",
+    disclaimerText:
+      "این برنامه معلومات عمومی و راه‌های تماس را منظم می‌کند. این مشوره حقوقی نیست. مهلت‌های پناهندگی می‌تواند کوتاه باشد، پس وضعیت خود را با یک کارمند حقوقی، انجمن، سپادا یا وکیل تایید کنید.",
+  },
+};
+
+const languageOrder = ["en", "fr", "dr"];
+const languageLabels = {
+  en: "FR",
+  fr: "DR",
+  dr: "EN",
 };
 
 const filters = {
@@ -339,11 +377,12 @@ function savePlanItem(resourceName) {
 
 function applyTranslations() {
   document.documentElement.lang = language;
+  document.documentElement.dir = language === "dr" ? "rtl" : "ltr";
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     const key = node.dataset.i18n;
     node.textContent = translations[language][key] || translations.en[key] || node.textContent;
   });
-  languageToggle.textContent = language === "en" ? "FR" : "EN";
+  languageToggle.textContent = languageLabels[language];
 }
 
 document.querySelector("#regionFilter").addEventListener("change", (event) => {
@@ -387,7 +426,8 @@ document.querySelector("#clearPlan").addEventListener("click", () => {
 });
 
 languageToggle.addEventListener("click", () => {
-  language = language === "en" ? "fr" : "en";
+  const nextIndex = (languageOrder.indexOf(language) + 1) % languageOrder.length;
+  language = languageOrder[nextIndex];
   applyTranslations();
 });
 
